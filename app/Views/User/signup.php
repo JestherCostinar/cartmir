@@ -29,31 +29,31 @@
                                         <?= csrf_field(); ?>
                                         <div class="mb-3">
                                             <label class="form-label">First Name</label>
-                                            <input type="text" class="form-control" name="firstname" value="<?= set_value('firstname') ?>">
+                                            <input type="text" class="form-control" name="firstname" value="<?= set_value('firstname') ?>" placeholder="Firstname">
                                             <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'firstname') : ''; ?></span>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" name="lastname" value="<?= set_value('lastname') ?>">
+                                            <input type="text" class="form-control" name="lastname" value="<?= set_value('lastname') ?>" placeholder="Lastname">
                                             <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'lastname') : ''; ?></span>
                                         </div>
                                         <div class=" mb-3">
                                             <label class="form-label">Email address</label>
-                                            <input type="text" class="form-control" name="email" value="<?= set_value('email') ?>">
+                                            <input type="text" class="form-control" name="email" value="<?= set_value('email') ?>" placeholder="Email Address">
                                             <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'email') : ''; ?></span>
                                         </div>
                                         <div class=" mb-3">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password">
+                                            <input type="password" class="form-control" name="password" placeholder="Password">
                                             <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'password') : ''; ?></span>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Confirm Password</label>
-                                            <input type="password" class="form-control" name="confirmPassword">
+                                            <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
                                             <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'confirmPassword') : ''; ?></span>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Register</button>
-                                        
+
                                     </form>
                                 </div>
                             </div>

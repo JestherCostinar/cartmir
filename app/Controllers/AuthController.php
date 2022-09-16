@@ -90,6 +90,10 @@ class AuthController extends BaseController
         return view('User/signup', $data);
     }
 
+    public function adminLogin() {
+        return view('Admin/login');
+    }
+
     public function setUserSession($user)
     {
         $data = [

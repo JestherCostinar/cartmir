@@ -28,12 +28,12 @@
                             <?= csrf_field(); ?>
                             <div class="mb-3 mr-3">
                                 <label class="form-label">Email</label>
-                                <input type="text" class="form-control " name="email" value="<?= set_value('email') ?>">
+                                <input type="text" class="form-control " name="email" value="<?= set_value('email') ?>" placeholder="Email Address">
                                 <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'email') : ''; ?></span>
                             </div>
                             <div class="mb-3  mr-3">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                                 <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'password') : ''; ?></span>
 
                             </div>
