@@ -1,63 +1,63 @@
-# CodeIgniter 4 Application Starter
+# Kasmir Cart 🛒
 
-## What is CodeIgniter?
+## What is Kasmir Cart
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+Kasmir Cart is an e-commerce website built on some of the most popular open source technologies such as Codeigniter and Vanilla JS.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 💾 Technologies
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+Programming Languages and Framework:
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+- CodeIgniter is a powerful PHP framework with a very small footprint, built for developers who need a simple and elegant toolkit to create full-featured web applications.
+- PHP is an open-source server-side scripting language that many devs use for web development.
+- Bootstrap is the most popular CSS Framework for developing responsive and mobile-first websites.
+- JavaScript is a scripting or programming language that allows you to implement complex features on web pages
+- MySQL is a relational database management system. Databases are the essential data repository for all software applications. 
 
-## Installation & updates
+## Installation
+#### Requirements:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- PHP 7.4
+- MySQL
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+#### Configuration:
+- Create the .env file:
 
-## Setup
+```
+cp env .env
+```
+- Open the .env file and configure the database access
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+```
+database.default.hostname = localhost
+database.default.database = kasmir_ecommerce
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+```
+- Install packages:
 
-## Important Change with index.php
+```
+composer install
+```
+- Create database tables (CI4 migrations)
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+```
+php spark migrate
+```
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+- Then run
 
-**Please** read the user guide for a better explanation of how CI4 works!
+```
+php spark serve
+```
 
-## Repository Management
+## 👨‍💻Contact Me 🚀🔵
+- Email - jesther.jc15@gmail.com
+- LinkedIn - https://www.linkedin.com/in/jesther-costinar/
+- Facebook - https://www.facebook.com/jeestheeer
+- Instagram - https://www.instagram.com/kaassmir/
+- Twitter - https://twitter.com/kasmir_
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
 
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
