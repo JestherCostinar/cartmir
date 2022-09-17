@@ -15,7 +15,13 @@ class AdminController extends BaseController
         return view('Admin/index', $data);
     }
 
-    public function dashboard() {
-        
+    public function product() {
+        $data = [
+            'title' => 'Product'
+        ];
+
+        return view('Admin/products', $data);
     }
+
+    
 }

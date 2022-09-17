@@ -11,8 +11,9 @@ class NoAuth implements FilterInterface
     // Function to check if is logged in then return true
     public function before(RequestInterface $request, $arguments = null)
     {
+        $location = (session()->get('user_type') === 'user') ? '/dashboard' : '/';
         if (session()->get('isLoggedIn')) {
-            return redirect()->to('/');
+            return redirect()->to($location);
         }
     }
 
