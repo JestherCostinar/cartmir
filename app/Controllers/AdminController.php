@@ -8,10 +8,20 @@ class AdminController extends BaseController
 {
     public function index()
     {
-        return view('Admin/index');
+        $data = [
+            'title' => 'Dashboard'
+        ];
+
+        return view('Admin/index', $data);
     }
 
-    public function dashboard() {
-        
+    public function product() {
+        $data = [
+            'title' => 'Product'
+        ];
+
+        return view('Admin/products', $data);
     }
+
+    
 }

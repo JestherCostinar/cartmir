@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
+use App\Models\AdminModel;
 use App\Models\AuthModel;
 
 class AuthController extends BaseController
@@ -23,7 +24,7 @@ class AuthController extends BaseController
 
             // Validation
             $rules = [
-                'email' => 'required|min_length[6]|max_length[50]|valid_email',
+                'email' => 'required|valid_email',
                 'password' => 'required',
             ];
 
@@ -35,12 +36,14 @@ class AuthController extends BaseController
                 ->first();
                 $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $user['password']);
 
-                if (!$validatePassword) {
-                    session()->setFlashData('loginError', 'Email or Password don\'t match');
-                    return redirect()->to('/login');
-                } else {
+                if (($validatePassword) && ($user['user_type'] === 'user')) {
                     $this->setUserSession($user);
                     return redirect()->to(base_url());
+                    
+                } else {
+                    session()->setFlashData('loginError', 'Email or Password don\'t match');
+                    return redirect()->to('/login');
+                   
                 }
             }
         }
@@ -91,7 +94,35 @@ class AuthController extends BaseController
     }
 
     public function adminLogin() {
-        return view('Admin/login');
+        $data = [
+            'title' => 'Admin login'
+        ];
+
+        if ($this->request->getMethod() === 'post') {
+            // Validation
+            $rules = [
+                'email' => 'required|valid_email',
+                'password' => 'required',
+            ];
+
+            if (!$this->validate($rules)) {
+                $data['validation'] = $this->validator;    
+            } else {
+                $adminModel = new AuthModel();
+                $admin = $adminModel->where('email', $this->request->getPost('email'))
+                    ->first();
+                $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $admin['password']);
+                if (($validatePassword) && ($admin['user_type'] === 'admin')) {
+                    $this->setUserSession($admin);
+                    return redirect()->to('/dashboard');
+                } else {
+                    session()->setFlashData('loginError', 'Email or Password don\'t match');
+                    return redirect()->to('/admin');
+                }
+            }
+        }
+
+        return view('Admin/login', $data);
     }
 
     public function setUserSession($user)
@@ -108,9 +139,29 @@ class AuthController extends BaseController
         return true;
     }
 
+    public function setAdminSession($admin)
+    {
+        $data = [
+            'id' => $admin['id'],
+            'name' => $admin['name'],
+            'phone' => $admin['phone'],
+            'email' => $admin['email'],
+            'isLoggedIn' => true
+        ];
+
+        session()->set($data);
+        return true;
+    }
+
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
+    }
+
+    public function adminLogout()
+    {
+        session()->destroy();
+        return redirect()->to('/admin');
     }
 }

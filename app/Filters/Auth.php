@@ -11,8 +11,9 @@ class Auth implements FilterInterface
     // Function to check if is not logged in
     public function before(RequestInterface $request, $arguments = null)
     {
+        $location = (session()->get('user_type') === 'user') ? '/login' : '/admin';
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login');
+            return redirect()->to($location);
         }
     }
 

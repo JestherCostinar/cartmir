@@ -26,7 +26,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'auth'          => Auth::class,
-        'noauth'        => NoAuth::class
+        'noauth'        => NoAuth::class,
     ];
 
     /**
