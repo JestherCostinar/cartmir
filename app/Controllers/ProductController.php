@@ -94,7 +94,7 @@ class ProductController extends BaseController
                     ];
 
                     if ($this->productModel->save($productData)) {
-                        $data['Flash_message'] = TRUE;
+                        return redirect()->to('product')->with('success', 'Product has been Save Successfully');
                     }
                 }
             }
@@ -147,7 +147,7 @@ class ProductController extends BaseController
                     'rules' => 'uploaded[product_image]'
                     . '|is_image[product_image]'
                     . '|mime_in[product_image,image/jpg,image/jpeg,image/png]'
-                    . '|max_size[product_image, 100]'
+                    . '|max_size[product_image, 1000]'
                 ]
             ]);
 

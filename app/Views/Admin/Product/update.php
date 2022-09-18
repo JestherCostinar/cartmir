@@ -16,7 +16,7 @@
                         </h3>
                         <img src="<?= base_url('uploads/' . $product['image']) ?>" alt="" width="300px" height="300px">
 
-                        <form class="login_form" action="<?= base_url('/product/create') ?>" method="post" enctype="multipart/form-data">
+                        <form class="login_form" action="<?= base_url('/product/update/' . $product['id']) ?>" method="post" enctype="multipart/form-data">
                             <select class="login_formele" name="category_id" value="<?= set_value('category_id', $product['category_id']) ?>">
                                 <option selected value="<?= set_value('category_id', $product['category_id']) ?>"><?= set_value('category_id', $product['category_id']) ?></option>
                                 <?php foreach ($categories as $i => $category) : ?>
