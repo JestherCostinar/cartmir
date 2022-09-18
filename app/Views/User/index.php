@@ -3,8 +3,8 @@
 <?= $this->section('content') ?>
 <?= $this->include('User/layout/inc/navbar.php'); ?>
 <?php
-$data = session()->get();
-print_r($data); ?>
+// $data = session()->get();
+// print_r($data); ?>
 <section class="banner_section">
     <div class="container">
         <div class="row">

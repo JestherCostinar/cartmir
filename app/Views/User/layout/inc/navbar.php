@@ -1,7 +1,7 @@
     <header class="bottom_headersc">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light ">
-                <a class="navbar-brand" href="#"> <img src="<?= base_url('assets/user/images/logo-5.png') ?>" class="logo"> </a>
+                <a class="navbar-brand" href="#"> <img src="<?= base_url('assets/user/images/kasmir-cart.png') ?>" height="100px" class="logo"> </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -11,18 +11,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Top Offers</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="orderlist.html">Orderlist</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Fashion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Toys & More</a>
-                        </li>
+                        <?php foreach ($categories as $i => $category) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('productlist/' . $category['id']) ?>"><?= $category['category_name'] ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                     <?php if (session()->get('isLoggedIn')) : ?>
 

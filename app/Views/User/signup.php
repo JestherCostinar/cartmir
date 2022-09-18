@@ -79,7 +79,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p>Copyright © ORFARM all rights reserved. Powered by <b>UBKINFOTECH</b></p>
+                <p><b>KASMIR </b> © 2022</p>
             </div>
         </div>
     </div>
