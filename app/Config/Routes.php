@@ -44,14 +44,20 @@ $routes->get('/logout', 'AuthController::logout');
 /* ================ ADMIN ROUTES ==================== */
 $routes->match(['get', 'post'], '/admin', 'AuthController::adminLogin', ['filter' => 'noauth']);
 $routes->get('/dashboard', 'AdminController::index', ['filter' => 'auth']);
-$routes->match(['get', 'post'], '/product', 'AdminController::product', ['filter' => 'auth']);
+$routes->get('/adminLogout', 'AuthController::adminLogout');
+
+// Product
+$routes->get('/product', 'ProductController::index', ['filter' => 'auth']);
+$routes->match(['get', 'post'], '/product/create', 'ProductController::create', ['filter' => 'auth']);
+$routes->get('/product/delete/(:num)', 'ProductController::delete/$1', ['filter' => 'auth']);
+$routes->match(['get', 'post'], '/product/update/(:num)', 'ProductController::update/$1', ['filter' => 'auth']);
+
 // Category 
 $routes->get('/category', 'CategoryController::index', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/category/create', 'CategoryController::create', ['filter' => 'auth']);
 $routes->get('/category/delete/(:num)', 'CategoryController::delete/$1', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/category/update/(:num)', 'CategoryController::update/$1', ['filter' => 'auth']);
 
-$routes->get('/adminLogout', 'AuthController::adminLogout');
 
 /*
  * --------------------------------------------------------------------

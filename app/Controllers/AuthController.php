@@ -95,7 +95,7 @@ class AuthController extends BaseController
 
     public function adminLogin() {
         $data = [
-            'title' => 'Admin login'
+            'title' => 'Admin'
         ];
 
         if ($this->request->getMethod() === 'post') {

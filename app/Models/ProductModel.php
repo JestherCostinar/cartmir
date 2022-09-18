@@ -4,15 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoryModel extends Model
+class ProductModel extends Model
 {
-    protected $table            = 'category';
+    protected $table            = 'product';
     protected $primaryKey       = 'id';
     protected $allowedFields    = [
-        'category_name',
-        'category_image',
+        'product_name',
+        'product_desc',
+        'qty',
+        'MRP',
+        'selling_price',
+        'image',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'category_id'
     ];
 
     // Callbacks
