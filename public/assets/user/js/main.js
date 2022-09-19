@@ -10,6 +10,7 @@ function addToCart(productID, price, userID) {
       const jsonData = JSON.parse(response);
       if (jsonData.status == "success") {
         $("#addCount").val(jsonData.qty);
+        $("#addCount_" + productID).val(jsonData.qty);
         $("#addToCartBtn").hide();
         $("#inputDiv").show();
         $("#countOfProductInCart").text(jsonData.count);
@@ -31,11 +32,35 @@ function minus(productID, userID) {
       const jsonData = JSON.parse(response);
       if (jsonData.status == "success") {
         $("#addCount").val(jsonData.qty);
+        $("#addCount_" + productID).val(jsonData.qty);
         $("#addToCartBtn").hide();
         $("#inputDiv").show();
       } else {
+        $("#productRow_" + productID).html('');
+        $("#middleborder_" + productID).hide('');
+        $("#middlebordertop_" + productID).hide("");
+        $("#countOfProductInCart").text(jsonData.count);
         $("#addToCartBtn").show();
         $("#inputDiv").hide();
+      }
+    },
+  });
+}
+
+// Decrement product in cart
+function removeItem(productID, userID, cartID) {
+  $.ajax({
+    url: baseUrl + "removeItem", //Decrement product quantity in cart
+    type: "POST",
+    data: { cartID: cartID, userID: userID },
+    success: function (response) {
+      // alert(response);
+      const jsonData = JSON.parse(response);
+      if (jsonData.status == "success") {
+        $("#productRow_" + productID).html("");
+        $("#middleborder_" + productID).hide("");
+        $("#middlebordertop_" + productID).hide("");
+      } else {
       }
     },
   });

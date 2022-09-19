@@ -16,12 +16,12 @@
                     <div class="details_btnsc">
                         <!-- Please Wait -->
                         <?php if (session()->get('isLoggedIn')) : ?>
-                            <a <?php if ($product['cart_quantity'] != '') { ?> style="display: none;" <?php } ?> href="javascript:void(0)" id="addToCartBtn" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)"><button class="details_btn">ADD TO CART</button></a>
+                            <a <?php if ($product['cartUserID'] == session()->get('id')) { ?> style="display: none;" <?php } ?> href="javascript:void(0)" id="addToCartBtn" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)"><button class="details_btn">ADD TO CART</button></a>
                         <?php else : ?>
                             <a href="<?= base_url('/login') ?>"><button class="details_btn">ADD TO CARTs</button></a>
                         <?php endif; ?>
 
-                        <div id="inputDiv" class="detail_addtocart" <?php if ($product['cart_quantity'] == '') { ?> style="display: none;" <?php } ?>>
+                        <div id="inputDiv" class="detail_addtocart" <?php if ($product['cartUserID'] != session()->get('id')) { ?> style="display: none;" <?php } ?>>
                             <input type="button" value="+" id="plus" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)" class="plus_input">
                             <input type="text" size="25" value="1" id="addCount" class="details_inputtext">
                             <input type="button" value="-" id="minus" onclick="minus(<?= $product['id'] ?>, <?= session()->get('id') ?>)" class="minus_input">
