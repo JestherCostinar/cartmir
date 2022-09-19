@@ -5,28 +5,38 @@ function addToCart(productID, price, userID) {
     url: baseUrl + "addToCart",
     type: "POST",
     data: { productID: productID, price: price, userID: userID },
-    beforeSend: function () {
-      $("#pleaseWait").text("Please Wait....");
-    },
-    complete: function () {
-      $("#pleaseWait").text("");
-    },
     success: function (response) {
       console.log(response);
       const jsonData = JSON.parse(response);
       if (jsonData.status == "success") {
-         $("#addCount").val(jsonData.qty);
+        $("#addCount").val(jsonData.qty);
+        $("#addToCartBtn").hide();
+        $("#inputDiv").show();
+        $("#countOfProductInCart").text(jsonData.count);
+      } else {
+        // Statement
+      }
+    },
+  });
+}
+
+// Decrement product in cart
+function minus(productID, userID) {
+  $.ajax({
+    url: baseUrl + "decrement", //Decrement product quantity in cart
+    type: "POST",
+    data: { productID: productID, userID: userID },
+    success: function (response) {
+      // alert(response);
+      const jsonData = JSON.parse(response);
+      if (jsonData.status == "success") {
+        $("#addCount").val(jsonData.qty);
         $("#addToCartBtn").hide();
         $("#inputDiv").show();
       } else {
+        $("#addToCartBtn").show();
+        $("#inputDiv").hide();
       }
-
-      // if(response == 1) {
-      //     $("#addToCartBtn").hide();
-      //     $("#inputDiv").show();
-      // } else {
-
-      // }
     },
   });
 }

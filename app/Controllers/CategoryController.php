@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CategoryModel;
-use CodeIgniter\Files\File;
 
 class CategoryController extends BaseController
 {
