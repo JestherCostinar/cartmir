@@ -63,7 +63,7 @@ class HomeController extends BaseController
             ];
 
             $productDetail = $this->cartModel->where('product_id', $product_id)->where('user_id', $user_id)->findAll();
-            $count = $this->cartModel->where('user_id', $user_id)->countAll();
+            $count = $this->cartModel->where('user_id', $user_id)->countAllResults();
 
             if(count($productDetail) == 1) {
                 $oldQyt = $productDetail[0]['qty'];
