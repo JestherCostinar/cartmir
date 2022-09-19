@@ -16,7 +16,7 @@
                         </h3>
                         <img src="<?= base_url('uploads/' . $product['image']) ?>" alt="" width="300px" height="300px">
 
-                        <form class="login_form" action="<?= base_url('/product/create') ?>" method="post" enctype="multipart/form-data">
+                        <form class="login_form" action="<?= base_url('/product/update/' . $product['id']) ?>" method="post" enctype="multipart/form-data">
                             <select class="login_formele" name="category_id" value="<?= set_value('category_id', $product['category_id']) ?>">
                                 <option selected value="<?= set_value('category_id', $product['category_id']) ?>"><?= set_value('category_id', $product['category_id']) ?></option>
                                 <?php foreach ($categories as $i => $category) : ?>
@@ -44,7 +44,11 @@
                                 <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'product_image') : ''; ?></span>
                             </div>
 
-                            <textarea type="text" placeholder="Product Description" class="login_formele" name="product_desc" rows="10"><?= set_value('product_desc', $product['product_desc']) ?></textarea>
+                            <div class="form-group mt-4">
+                                <label>Product Description</label>
+                                <textarea type="text" placeholder="Product Description" id="ck_editor" class="login_formele" name="product_desc" rows="10"><?= set_value('product_desc', $product['product_desc']) ?></textarea>
+                                <span class=" text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'product_desc') : ''; ?></span>
+                            </div>
                             <div class="login_btnsc">
                                 <button class="login_btn">Submit</button>
                             </div>
@@ -56,4 +60,9 @@
     </div>
 </section>
 
+<?= $this->endSection(); ?>
+<?= $this->section('scripts') ?>
+<script>
+    CKEDITOR.replace('ck_editor');
+</script>
 <?= $this->endSection(); ?>

@@ -42,7 +42,7 @@ class CategoryController extends BaseController
                     'rules' => 'uploaded[category_image]'
                     . '|is_image[category_image]'
                     . '|mime_in[category_image,image/jpg,image/jpeg,image/png]'
-                    . '|max_size[category_image, 100]'
+                    . '|max_size[category_image, 1000]'
                 ]
             ]);
 
@@ -91,7 +91,7 @@ class CategoryController extends BaseController
                     'rules' => 'uploaded[category_image]'
                     . '|is_image[category_image]'
                     . '|mime_in[category_image,image/jpg,image/jpeg,image/png]'
-                    . '|max_size[category_image, 100]'
+                    . '|max_size[category_image, 1000]'
                 ]
             ]);
 

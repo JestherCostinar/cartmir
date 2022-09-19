@@ -35,7 +35,6 @@
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password" placeholder="Password">
                                 <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'password') : ''; ?></span>
-
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
 
