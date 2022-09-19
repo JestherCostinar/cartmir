@@ -14,19 +14,18 @@
                         </div>
                     </div>
                     <div class="details_btnsc">
-                        <div id="inputDiv" class="detail_addtocart" style="display: none;">
-                            <input type="button" value="+" id="plus" onclick="plus()" class="plus_input">
-                            <input type="text" size="25" value="1" id="addCount" class="details_inputtext">
-                            <input type="button" value="-" id="minus" onclick="minus()" class="minus_input">
-                        </div>
-
                         <!-- Please Wait -->
                         <?php if (session()->get('isLoggedIn')) : ?>
-                            <a href="javascript:void(0)" id="addToCartBtn" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)"><button class="details_btn">ADD TO CART</button></a>
+                            <a <?php if ($product['cart_quantity'] != '') { ?> style="display: none;" <?php } ?> href="javascript:void(0)" id="addToCartBtn" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)"><button class="details_btn">ADD TO CART</button></a>
                         <?php else : ?>
                             <a href="<?= base_url('/login') ?>"><button class="details_btn">ADD TO CARTs</button></a>
-
                         <?php endif; ?>
+
+                        <div id="inputDiv" class="detail_addtocart" <?php if ($product['cart_quantity'] == '') { ?> style="display: none;" <?php } ?>>
+                            <input type="button" value="+" id="plus" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)" class="plus_input">
+                            <input type="text" size="25" value="1" id="addCount" class="details_inputtext">
+                            <input type="button" value="-" id="minus" onclick="minus(<?= $product['id'] ?>, <?= session()->get('id') ?>)" class="minus_input">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,15 +38,6 @@
                     <p style="color: #000;"><?= $product['product_desc'] ?>
                     <p>
                 </div>
-                <!-- <div class="details_textbox1">
-                    <h3>Specifications</h3>
-                    <h6>Sales Package1 X Power Bank , Charging Cable , User Manual</h6>
-                    <h6>Model Name Power Bank DX03 10000 Mah</h6>
-                    <h6>Suitable Device Mobile</h6>
-                    <h6>Number of Output Ports 3</h6>
-                    <h6>Charging Cable Included Yes</h6>
-                    <h6>Weight 195 g</h6>
-                </div> -->
             </div>
         </div>
     </div>
