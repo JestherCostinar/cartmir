@@ -69,7 +69,7 @@ class ProductController extends BaseController
                     'rules' => 'uploaded[product_image]'
                     . '|is_image[product_image]'
                     . '|mime_in[product_image,image/jpg,image/jpeg,image/png]'
-                    . '|max_size[product_image, 100]'
+                    . '|max_size[product_image, 1000]'
                 ]
             ]);
 
@@ -150,7 +150,6 @@ class ProductController extends BaseController
                     . '|max_size[product_image, 1000]'
                 ]
             ]);
-
 
             // Validate
             if (!$validation) {

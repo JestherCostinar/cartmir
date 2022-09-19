@@ -23,6 +23,7 @@
             <div class="col-xl-12 col-md-12 col-12 p-0 m-0">
                 <div class="deals_textbox">
                     <h4>Market List</h4>
+                    <a href="<?= base_url('/') ?>">VIEW ALL</a>
                 </div>
             </div>
 
@@ -30,8 +31,8 @@
                 <div class="col-xl-3 col-md-6 col-12">
                     <div class="products_imgbox">
                         <img src="<?= base_url('uploads/' . $product['image']) ?>" class="products_img">
-                        <h3><?= $product['product_name']; ?></h3>
-                        <h4><?= $product['product_desc']; ?></h4>
+                        <h3 class="product_name"><?= $product['product_name']; ?></h3>
+                        <!-- <h4><?= strlen($product['product_desc']) > 150 ? substr($product['product_desc'], 0, 130) . "..." : $product['product_desc']; ?></h4> -->
                         <h3><span style="color: #000; font-weight: 900">Stocks</span> : <?= $product['qty']; ?></h3>
                         <div class="products_textbox">
 
@@ -58,7 +59,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p><b>KASMIR </b> © 2022</p>
+                <p>Copyright © 2045 Company Name | Developed by <b>kasmir </b></p>
             </div>
         </div>
     </div>

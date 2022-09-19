@@ -18,10 +18,14 @@
 
     <?= $this->renderSection('content'); ?>
     <!--bootstrap links-->
-    <script src="<?= base_url('assets/user/js/jquery.slim.min.js') ?>"></script>
+    <script src="<?= base_url('assets/user/js/jquery-3.6.1.js') ?>"></script>
+
     <script src="<?= base_url('assets/user/js/bootstrap.bundle.min.js') ?>"></script>
     <!--owl slider link-->
     <script src="<?= base_url('assets/user/js/owl.carousel.min.js') ?>"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="<?= base_url('assets/user/js/main.js') ?>"></script>
 
     <!-- Script for Specific file -->
     <?= $this->renderSection('script') ?>

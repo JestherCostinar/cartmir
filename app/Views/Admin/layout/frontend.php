@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&display=swap" rel="stylesheet">
+    <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
     <!--css link-->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css'); ?>">
     <!--owl slider link-->

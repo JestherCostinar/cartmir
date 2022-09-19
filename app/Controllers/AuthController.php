@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
-use App\Models\AdminModel;
 use App\Models\AuthModel;
 
 class AuthController extends BaseController
@@ -32,8 +31,7 @@ class AuthController extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 $userModel = new AuthModel();
-                $user = $userModel->where('email', $this->request->getPost('email'))
-                ->first();
+                $user = $userModel->where('email', $this->request->getPost('email'))->first();
                 $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $user['password']);
 
                 if (($validatePassword) && ($user['user_type'] === 'user')) {

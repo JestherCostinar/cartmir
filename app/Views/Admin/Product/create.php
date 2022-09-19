@@ -46,11 +46,16 @@
                                     <label class=" custom-file-label" for="inputGroupFile04">Choose file for Product Image</label>
                                 </div>
                             </div>
+
                             <div>
                                 <span class="text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'product_image') : ''; ?></span>
                             </div>
 
-                            <textarea type="text" placeholder="Product Description" class="login_formele" name="product_desc" rows="10" value="<?= set_value('category_id') ?>"></textarea>
+                            <div class="form-group mt-4">
+                                <label>Product Description</label>
+                                <textarea type="text" placeholder="Product Description" class="login_formele" id="ck_editor" name="product_desc" rows="10" value="<?= set_value('product_desc') ?>"></textarea>
+                                <span class=" text-danger text-sm"><?= isset($validation) ? form_validator($validation, 'product_desc') : ''; ?></span>
+                            </div>
                             <div class="login_btnsc">
                                 <button class="login_btn">Submit</button>
                             </div>
@@ -62,4 +67,9 @@
     </div>
 </section>
 
+<?= $this->endSection(); ?>
+<?= $this->section('scripts') ?>
+<script>
+    CKEDITOR.replace('ck_editor');
+</script>
 <?= $this->endSection(); ?>

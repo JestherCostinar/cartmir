@@ -37,9 +37,9 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 /* ================ USER ROUTES ==================== */
 $routes->get('/', 'HomeController::index');
-$routes->get('/productlist/(:num)', 'HomeController::productList/$1');
-$routes->get('/details/(:num)', 'HomeController::details/$1');
-
+$routes->get('productlist/(:num)', 'HomeController::productList/$1');
+$routes->get('details/(:num)', 'HomeController::details/$1');
+$routes->match(['get', 'post'], 'addToCart', 'HomeController::addToCart');
 $routes->match(['get', 'post'], '/login', 'AuthController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], '/signup', 'AuthController::signup', ['filter' => 'noauth']);
 $routes->get('/logout', 'AuthController::logout');

@@ -14,13 +14,25 @@
                         </div>
                     </div>
                     <div class="details_btnsc">
-                        <a href="cart.html"><button class="details_btn">ADD TO CART</button></a>
+                        <div id="inputDiv" class="detail_addtocart" style="display: none;">
+                            <input type="button" value="+" id="plus" onclick="plus()" class="plus_input">
+                            <input type="text" size="25" value="1" id="addCount" class="details_inputtext">
+                            <input type="button" value="-" id="minus" onclick="minus()" class="minus_input">
+                        </div>
+
+                        <!-- Please Wait -->
+                        <?php if (session()->get('isLoggedIn')) : ?>
+                            <a href="javascript:void(0)" id="addToCartBtn" onclick="addToCart(<?= $product['id'] ?>, <?= $product['selling_price'] ?>, <?= session()->get('id') ?>)"><button class="details_btn">ADD TO CART</button></a>
+                        <?php else : ?>
+                            <a href="<?= base_url('/login') ?>"><button class="details_btn">ADD TO CARTs</button></a>
+
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
             <div class="col-xl-8 col-md-12 col-12">
                 <div class="details_textbox">
-                    <h3><?= $product['product_name'] ?></h3>
+                    <h3 class="red"><?= $product['product_name'] ?></h3>
                     <h4>₱ <?= number_format($product['selling_price'], '2', '.', ',') ?> <span><del><?= number_format($product['MRP'], '2', '.', ',') ?></del></span></h4>
                     <P>Hurry, Only 1 left!</P>
                     <h5>Available offers</h5>
@@ -46,7 +58,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p><b>KASMIR </b> © 2022</p>
+                <p>Copyright © 2045 Company Name | Developed by <b>kasmir </b></p>
             </div>
         </div>
     </div>

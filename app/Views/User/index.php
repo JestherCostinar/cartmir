@@ -4,7 +4,8 @@
 <?= $this->include('User/layout/inc/navbar.php'); ?>
 <?php
 // $data = session()->get();
-// print_r($data); ?>
+// print_r($data); 
+?>
 <section class="banner_section">
     <div class="container">
         <div class="row">
@@ -26,112 +27,44 @@
 <!--prosucts section start hare-->
 <section class="products_section">
     <div class="container-fluid">
-        <div class="col-xl-12 col-md-12 col-12 p-0 m-0">
-            <div class="deals_textbox">
-                <h4>FASHION</h4>
-                <a href="#">VIEW ALL</a>
-            </div>
-        </div>
-        <div class="slider2 owl-carousel owl-theme">
 
-            <div class="item">
-                <div class="products_imgbox">
-                    <img src="<?= base_url('assets/user'); ?>/images/product-24.jpg" class="products_img">
-                    <h3>T-Shirt</h3>
-                    <h4>black</h4>
-                    <p>1 pc</p>
-                    <div class="products_textbox">
 
-                        <div class="products_ulbox">
-                            <ul>
+        <section class="products_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-12 p-0 m-0">
+                        <div class="deals_textbox">
+                            <h4>ALL PRODUCTS</h4>
+                        </div>
+                    </div>
 
-                                <li>
-                                    <a href="details.html"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg> Add</button></a>
-                                </li>
-                            </ul>
+                    <?php foreach ($products as $product) : ?>
+                        <div class="col-xl-3 col-md-12 col-12">
+                            <div class="products_imgbox">
+                                <img src="<?= base_url('uploads/' . $product['image']) ?>" class="products_img">
+                                <h3 class="product_name"><?= $product['product_name']; ?></h3>
+                                <!-- <h4><?= strlen($product['product_desc']) > 150 ? substr($product['product_desc'], 0, 130) . "..." : $product['product_desc']; ?></h4> -->
+                                <h3 class="mt-0"><span style="color: #000; font-weight: 900">Stocks</span> : <?= $product['qty']; ?></h3>
+                                <div class="products_textbox">
+
+                                    <div class="products_ulbox">
+                                        <ul>
+
+                                            <li>
+                                                <a href="<?= base_url('details/' . $product['id']) ?>"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                                        </svg> Add</button></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-            <div class="item">
-                <div class="products_imgbox">
-                    <img src="<?= base_url('assets/user'); ?>/images/product-26.jpg" class="products_img">
-                    <h3>Sunglases</h3>
-                    <h4>Yellow</h4>
-                    <p>1pc</p>
-                    <div class="products_textbox">
-                        <div class="products_ulbox">
-                            <ul>
-                                <li>
-                                    <a href="details.html"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg> Add</button></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="products_imgbox">
-                    <img src="<?= base_url('assets/user'); ?>/images/product-1.jpg" class="products_img">
-                    <h3>Dress</h3>
-                    <h4>Pink</h4>
-                    <p>1pc</p>
-                    <div class="products_textbox">
-                        <div class="products_ulbox">
-                            <ul>
-                                <li>
-                                    <a href="details.html"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg> Add</button></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="products_imgbox">
-                    <img src="<?= base_url('assets/user'); ?>/images/product-21.jpg" class="products_img">
-                    <h3>T-Shirt</h3>
-                    <h4>Green</h4>
-                    <p>1pc</p>
-                    <div class="products_textbox">
-                        <div class="products_ulbox">
-                            <ul>
-                                <li>
-                                    <a href="details.html"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg> Add</button></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="products_imgbox">
-                    <img src="<?= base_url('assets/user'); ?>/images/product-4.jpg" class="products_img">
-                    <h3>Dress</h3>
-                    <h4>White</h4>
-                    <p>1pc</p>
-                    <div class="products_textbox">
-                        <div class="products_ulbox">
-                            <ul>
-                                <li>
-                                    <a href="details.html"><button><svg xmlns="http://www.w3.org/2000/svg" class="products_ulboxicon" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                                            </svg> Add</button></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
+    </div>
     </div>
 </section>
 <!--prosucts section end hare-->
@@ -139,7 +72,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p><b>KASMIR </b> © 2022</p>
+                <p>Copyright © 2045 Company Name | Developed by <b>kasmir </b></p>
             </div>
         </div>
     </div>
