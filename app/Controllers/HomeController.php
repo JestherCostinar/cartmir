@@ -41,7 +41,7 @@ class HomeController extends BaseController
         $data = [
             'title' => 'Product Detail',
             'categories' => $this->categoryModel->findAll(),
-            'product' => $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.product_id, cart.qty as cart_quantity, cart.cost')
+            'product' => $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.product_id, cart.user_id as cartUserID, cart.qty as cart_quantity, cart.cost')
                                             ->where('product.id', $productID)
                                             ->join('cart', 'cart.product_id = product.id', 'left')
                                             ->first()
@@ -78,9 +78,7 @@ class HomeController extends BaseController
                         'qty' => $oldQyt + 1,
                         'count' => $count
                     );
-                } else {
-                    echo "2";
-                }
+                } 
             } else {
                 if ($this->cartModel->save($data)) {
                     $return_arr = array(
@@ -88,9 +86,7 @@ class HomeController extends BaseController
                         'qty' => 1,
                         'count' => $count + 1
                     );
-                } else {
-                    echo "2";
-                }
+                } 
             }
             echo json_encode($return_arr);    
         }
@@ -103,13 +99,15 @@ class HomeController extends BaseController
             $product_id = $this->request->getPost('productID');
             $user_id = $this->request->getPost('userID');
             $productDetail = $this->cartModel->where('product_id', $product_id)->where('user_id', $user_id)->findAll();
+            $count = $this->cartModel->where('user_id', $user_id)->countAllResults();
             $oldQyt = $productDetail[0]['qty'];
             $id = $productDetail[0]['id'];
 
             if ($oldQyt == 1) {
                 if($this->cartModel->where('id', $id)->delete()) {
                     $return_arr = array(
-                        'status' => 'deleted',                    
+                        'status' => 'deleted',
+                        'count' => $count - 1                   
                     );
                 }
             } else {
@@ -121,13 +119,42 @@ class HomeController extends BaseController
                     $return_arr = array(
                         'status' => 'success',
                         'qty' => $oldQyt - 1,
+                        'count' => $count 
                     );
-                } else {
-                    echo "2";
-                }
+                } 
             }
             echo json_encode($return_arr);
         }
+    }
+
+    public function removeItem()
+    {
+        if ($this->request->getMethod() === 'post') {
+            $return_arr = array();
+            $count = $this->cartModel->where('user_id', $this->request->getPost('userID'))->countAllResults();
+
+            if ($this->cartModel->where('id', $this->request->getPost('cartID'))->delete()) {
+                $return_arr = array(
+                    'status' => 'success',
+                    'count' => $count - 1
+                );
+                echo json_encode($return_arr);
+            } 
+        }
+    }
+
+    public function cart() {
+        $data = [
+            'title' => 'Cart',
+            'categories' => $this->categoryModel->findAll(),
+            'cart_count' => $this->cartModel->where('user_id', session()->get('id'))->countAllResults(),
+            'cart_item' => $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                ->where('cart.user_id', session()->get('id'))
+                ->join('cart', 'cart.product_id = product.id')
+                ->findAll()
+        ];
+
+        return view('User/cart', $data);
     }
 }
 
