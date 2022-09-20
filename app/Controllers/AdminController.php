@@ -12,7 +12,7 @@ class AdminController extends BaseController
             'title' => 'Dashboard'
         ];
 
-        return view('Admin/index', $data);
+        return view('Admin/dashboard', $data);
     }
 
     public function product() {
