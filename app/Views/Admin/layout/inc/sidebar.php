@@ -11,7 +11,7 @@
 
            <!-- Nav Item - Dashboard -->
            <li class="nav-item active">
-               <a class="nav-link" href="index.html">
+               <a class="nav-link" href="<?= base_url('dashboard')?>">
                    <i class="fas fa-fw fa-tachometer-alt"></i>
                    <span>Dashboard</span></a>
            </li>
@@ -31,16 +31,16 @@
                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                    <div class="bg-white py-2 collapse-inner rounded">
                        <h6 class="collapse-header">Tracking Status</h6>
-                       <a class="collapse-item" href="utilities-color.html">Pending</a>
-                       <a class="collapse-item" href="utilities-border.html">Accepted</a>
-                       <a class="collapse-item" href="utilities-animation.html">Out for Delivery</a>
-                       <a class="collapse-item" href="utilities-other.html">Delivered</a>
+                       <a class="collapse-item" href="<?= base_url('order-pending') ?>">Pending</a>
+                       <a class="collapse-item" href="<?= base_url('order-accepted') ?>">Accepted</a>
+                       <a class="collapse-item" href="<?= base_url('order-out-for-delivery') ?>">Out for Delivery</a>
+                       <a class="collapse-item" href="<?= base_url('order-delivered') ?>">Delivered</a>
                    </div>
                </div>
            </li>
            <!-- Nav Item - Charts -->
            <li class="nav-item">
-               <a class="nav-link" href="charts.html">
+               <a class="nav-link" href="<?= base_url('order') ?>">
                    <i class="fa fa-list-alt"></i>
                    <span>Order</span></a>
            </li>

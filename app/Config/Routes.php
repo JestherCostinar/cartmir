@@ -43,6 +43,9 @@ $routes->match(['get', 'post'], 'addToCart', 'HomeController::addToCart', ['filt
 $routes->match(['get', 'post'], 'decrement', 'HomeController::decrement', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'cart', 'HomeController::cart', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'checkout', 'HomeController::checkout', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'addShoppingAddress', 'HomeController::addShoppingAddress', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'proceedToOrder', 'HomeController::proceedToOrder', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'orderSuccess/(:any)', 'HomeController::orderSuccess/$1', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'removeItem', 'HomeController::removeItem', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/login', 'AuthController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], '/signup', 'AuthController::signup', ['filter' => 'noauth']);
@@ -65,6 +68,13 @@ $routes->match(['get', 'post'], '/category/create', 'CategoryController::create'
 $routes->get('/category/delete/(:num)', 'CategoryController::delete/$1', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/category/update/(:num)', 'CategoryController::update/$1', ['filter' => 'auth']);
 
+// Orders Item
+$routes->get('/order', 'OrderItemController::index', ['filter' => 'auth']);
+$routes->get('/order-pending', 'OrderItemController::pendingOrder', ['filter' => 'auth']);
+$routes->get('/order-accepted', 'OrderItemController::acceptedOrder', ['filter' => 'auth']);
+$routes->get('/order-out-for-delivery', 'OrderItemController::outForDelivery', ['filter' => 'auth']);
+$routes->get('/order-delivered', 'OrderItemController::deliveredOrder', ['filter' => 'auth']);
+$routes->get('/generateOrderReport', 'OrderItemController::generateOrderReport', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

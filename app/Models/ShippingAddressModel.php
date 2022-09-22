@@ -4,24 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class ShippingAddressModel extends Model
 {
-    protected $table            = 'order';
+    protected $table            = 'shipping_address';
     protected $primaryKey       = 'id';
     protected $allowedFields    = [
         'id',
-        'order_id',
-        'order_amount',
-        'order_date',
-        'image',
+        'fullname',
+        'city',
+        'area',
+        'pincode',
+        'address',
         'user_id',
-        'order_type',
-        'order_status',
-        'delivery_id',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
-
     // Callbacks
     protected $beforeInsert   = ['beforeInsert'];
     protected $beforeUpdate   = ['beforeUpdate'];

@@ -18,7 +18,7 @@ class Product extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',
             ],
-            'product_dec' => [
+            'product_desc' => [
                 'type'          => 'text',
                 'null'          => true
             ],

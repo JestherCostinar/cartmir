@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Order extends Migration
+class Orderdata extends Migration
 {
     public function up()
     {
@@ -44,6 +44,10 @@ class Order extends Migration
                 'type'          => 'ENUM("Pending", "Accepted", "out_for_delivery", "Delivered")',
                 'default'       => 'Pending',
                 'null'          => false
+            ],
+            'delivery_id' => [
+                'type'          => 'INT',
+                'null'          => false,
             ],
             'created_at' => [
                 'type'          => 'DATETIME',

@@ -2,9 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Database\Migrations\Orderitem;
 use App\Models\CartModel;
 use App\Models\CategoryModel;
+use App\Models\OrderItemModel;
+use App\Models\OrderModel;
 use App\Models\ProductModel;
+use App\Models\ShippingAddressModel;
 
 class HomeController extends BaseController
 {
@@ -13,7 +17,11 @@ class HomeController extends BaseController
         $this->categoryModel = new CategoryModel();
         $this->productModel = new ProductModel();
         $this->cartModel = new CartModel();
+        $this->shippingModel = new ShippingAddressModel();
+        $this->orderModel = new OrderModel();
+        $this->orderItemsModel = new OrderItemModel();
     }
+
     public function index()
     {
         $data = [
@@ -226,11 +234,102 @@ class HomeController extends BaseController
 
     public function checkout() {
         $data = [
+            'title' => 'Checkout',
             'categories' => $this->categoryModel->findAll(),
-            'title' => 'Checkout'
+            'shipping_address' => $this->shippingModel->where('user_id', session()->get('id'))->findAll(),
+            'cart_count' => $this->cartModel->where('user_id', session()->get('id'))->countAllResults(),
+            'cart_item' => $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                ->where('cart.user_id', session()->get('id'))
+                ->join('cart', 'cart.product_id = product.id')
+                ->findAll()
         ];
 
         return view('User/checkout', $data);
+    }
+
+    public function addShoppingAddress() {
+        if ($this->request->getMethod() === 'post') {
+            $shoppingAddress = [
+                'fullname' => $this->request->getPost('fullname'),
+                'city' => $this->request->getPost('city'),
+                'area' => $this->request->getPost('area'),
+                'pincode' => $this->request->getPost('pincode'),
+                'address' => $this->request->getPost('address'),
+                'user_id' => session()->get('id')
+            ];
+            if($this->shippingModel->save($shoppingAddress)) {
+                $response = [
+                    'status' => 'success',
+                    'lastInsertedID' => $this->shippingModel->getInsertID()
+                ];
+            } else {
+                $response = [
+                    'status' => 'failed',
+                ];
+            }
+            echo json_encode($response);
+        }
+    }
+
+    public function proceedToOrder() {
+        if ($this->request->getMethod() === 'post') {
+            $deliveryAddress = $this->request->getPost('deliveryAddress');
+            $paymentMethod = $this->request->getPost('paymentMethod');
+            $cartItem = $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                ->where('cart.user_id', session()->get('id'))
+                ->join('cart', 'cart.product_id = product.id')
+                ->findAll();
+            $subTotal = 0;
+            foreach ($cartItem as $item) {
+                $subTotal += $item['cost'] * $item['cart_quantity'];
+            }
+
+            $orderID = 'Cartmir-' . rand(1000, 2522222);
+            $orderData = array(
+                'order_id' => $orderID,
+                'order_amount' => $subTotal,
+                'order_date' => date('Y-m-d'),
+                'user_id' => session()->get('id'),
+                'order_type' => $paymentMethod,
+                'delivery_id' => $deliveryAddress
+            );
+
+            if ($this->orderModel->save($orderData)) {
+                $lastInsertedID = $this->orderModel->getInsertID();
+
+                foreach ($cartItem as $item) {
+                    $orderItem = array(
+                        'items_name' => $orderID,
+                        'items_amount' => $item['cost'],
+                        'items_qty' => $item['cart_quantity'],
+                        'order_date' => date('Y-m-d'),
+                        'order_id' => $lastInsertedID,
+                    );
+
+                    if ($this->orderItemsModel->save($orderItem)) {
+                        $response = [
+                            'status' => 'success',
+                            'orderdata' => $orderData
+                        ];
+                    } else {
+                        $response = [
+                            'status' => 'failed',                     
+                        ];
+                    }
+                    echo json_encode($response);
+                }
+            } 
+        }
+    }
+
+    public function orderSuccess() {
+        $data = [
+            'title' => 'Order Success',
+            'categories' => $this->categoryModel->findAll(),
+            'products' => $this->productModel->findAll(),
+        ];
+
+        return view('User/success', $data);
     }
 }
 

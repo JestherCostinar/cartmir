@@ -44,15 +44,8 @@
 </section>
 <!--products section end hare-->
 <!--footer section start hare-->
-<footer class="defpooter_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                Copyright &copy; 2022 &mdash; Developed by kasmir
-            </div>
-        </div>
-    </div>
-</footer>
+<?= $this->include('User/layout/inc/footer.php'); ?>
+
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
 <script>

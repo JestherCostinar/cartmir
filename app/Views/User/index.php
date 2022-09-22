@@ -2,10 +2,7 @@
 
 <?= $this->section('content') ?>
 <?= $this->include('User/layout/inc/navbar.php'); ?>
-<?php
-// $data = session()->get();
-// print_r($data); 
-?>
+
 <section class="banner_section">
     <div class="container">
         <div class="row">
@@ -68,15 +65,8 @@
     </div>
 </section>
 <!--prosucts section end hare-->
-<footer class="defpooter_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                Copyright &copy; 2022 &mdash; Developed by kasmir
-            </div>
-        </div>
-    </div>
-</footer>
+<?= $this->include('User/layout/inc/footer.php'); ?>
+
 
 <?= $this->endSection(); ?>
 <?= $this->section('script') ?>

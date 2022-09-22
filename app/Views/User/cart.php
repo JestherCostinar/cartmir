@@ -74,7 +74,7 @@
                     <?php }; ?>
                 </div>
                 <div class="cart_cheackoutsc">
-                    <a href="checkout.html">Checkout</a>
+                    <a href="<?= base_url('checkout')?>">Checkout</a>
                 </div>
             </div>
             <div class="col-xl-3 col-md-12 col-12">

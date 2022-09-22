@@ -9,68 +9,83 @@
             <div class="col-xl-9 col-md-12 col-12">
                 <div class="checkout_paymentbox">
                     <div class="checkout_atextele">Delivery address</div>
-                    <form class="checkout_paymentform">
-                        <input type="radio">
-                        <label>John doe , United state, 200012</label><br>
-                        <input type="radio">
-                        <label>Kalon Jon , Kolkata, 712</label><br>
-                        <input type="radio">
-                        <label>Bibek lon , Kolkata, 712</label><br>
-                        <input type="radio">
-                        <label>Loi Hapis , United state, 200012</label>
-                    </form>
+                    <div class="checkout_paymentform">
+                        <div id="shippingAddressDiv">
+                            <?php foreach ($shipping_address as $list) : ?>
+                                <label><input type="radio" name="shippingAddress" value="<?= $list['id']; ?>"> <?= $list['fullname'] . ' - ' . $list['pincode'] ?></label><br>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
                     <div class="checkout_paymentbtnsc">
                         <a href="particuler.html" class="consualt_btn" data-toggle="modal" data-target="#exampleModal">Add Address</a>
                     </div>
                 </div>
+
+                <div class="checkout_atextele">Order Summary</div>
+
                 <div class="cart_middleimgbox">
-                    <div class="checkout_deliverybox">Order summery</div>
-                    <div class="row">
-                        <div class="col-xl-2 col-md-12 col-12">
-                            <div class="cart_leftimgbox">
-                                <div class="cart_leftimgcon">
-                                    <img src="images/_Pngtree_12-dot_digital_mobile_phone_on_5489677_1-removebg-preview.png" class="cart_leftimg" alt="">
-                                </div>
-                                <div class="cart_formbox">
-                                    <div class="cart_formminus">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-                                        </svg>
+
+                    <?php
+                    $totalPrice = 0;
+                    $totalDiscount = 0;
+                    $subTotal = 0;
+                    foreach ($cart_item as $item) {
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
+                        $totalDiscount += $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
+                    ?>
+                        <div class="row" id="productRow_<?= $item['id'] ?>">
+                            <div class="col-xl-2 col-md-12 col-12">
+                                <div class="cart_leftimgbox">
+                                    <div class="cart_leftimgcon">
+                                        <img src="<?= base_url('uploads/' . $item['image']) ?>" class="cart_leftimg" style="border-radius: 50%; width: 120px; height: 120px" alt="">
                                     </div>
-                                    <input type="text" maxlength="4" placeholder="1" class="cart_input">
-                                    <div class="cart_formplus">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                        </svg>
+                                    <div class="cart_formbox">
+                                        <a href="javascript:void(0)" onclick="minus(<?= $item['id'] ?>, <?= session()->get('id') ?>)">
+                                            <div class="cart_formminus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                        <input type="text" maxlength="4" value="<?= $item['cart_quantity'] ?>" id="addCount_<?= $item['id'] ?>" class="cart_input">
+                                        <a href="javascript:void(0)" onclick="addToCart(<?= $item['id'] ?>, <?= $item['selling_price'] ?>, <?= session()->get('id') ?>)">
+                                            <div class=" cart_formplus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                </svg>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-md-12 col-12">
-                            <div class="cart_middletextbox">
-                                <h3>Realme x20 pro max</h3>
-                                <h4>Black</h4>
-                                <h5>₹ 10,499 <del>₹ 10,999</del><span> 4% OFF</span></h5>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-md-12 col-12">
-                            <div class="cart_rightextbox">
-                                <h6>Delivery expected sun jan 31 I <span> Delivery free</span></h6>
-                                <div class="cart_middletextbtnsc">
-                                    <button class="cart_middletextbtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="cart_deleteicon" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                        </svg>
-                                        Remove
-                                    </button>
+                            <div class="col-xl-4 col-md-12 col-12">
+                                <div class="cart_middletextbox">
+                                    <h3><?= $item['product_name'] ?></h3>
+                                    <h5>₱ <?= number_format($item['selling_price'], '2', '.', ',') ?> <del><?= number_format($item['MRP'], '2', '.', ',') ?></del>
+                                        <span> <?= round(($item['MRP'] - $item['cost']) * 100 / $item['MRP'], 2) . '% OFF';
+                                                ?></span>
+                                    </h5>
+
                                 </div>
                             </div>
+
                         </div>
-                    </div>
+
+                    <?php } ?>
                 </div>
                 <div class="cart_emailbox">
-                    <h4>Order confirmation mail will sent <span>email@xyz.com </span> </h4>
-                    <a href="success.html">proceed to pay</a>
+                        <div class="col-md-2">
+                            <label><input type="radio" value="COD" name="paymentMethod" id="" checked> COD</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label><input type="radio" value="ONLINE" name="paymentMethod" id=""> Online</label>
+                        </div>
+                        <div class="col-md-8">
+                            <a href="javascript:void(0)" onclick="proceedToPay()">proceed to pay</a>
+                        </div>
+                    <!-- <h4>Order confirmation mail will sent <span><?php echo session()->get('email') ?></span> </h4> -->
+
                 </div>
 
             </div>
@@ -80,11 +95,11 @@
                     <div class="cart_priceborder"></div>
                     <div class="cart_pricetextbox">
                         <h4>Price 2 item</h4>
-                        <h5>₹ 45,998</h5>
+                        <h5>₱ <span id="totalItemPrice"> <?= number_format($totalPrice, '2', '.', ',') ?></span></h5>
                     </div>
                     <div class="cart_pricetextbox">
                         <h4>Discount</h4>
-                        <h6>-₹ 1000</h6>
+                        <h6>₱ <span id="totalDiscount"><?= $totalDiscount ?></span></h6>
                     </div>
                     <div class="cart_pricetextbox">
                         <h4>Delivery charge</h4>
@@ -92,11 +107,10 @@
                     </div>
                     <div class="cart_amountbox">
                         <h4>Total amount</h4>
-                        <h5>₹ 44,998</h5>
+                        <h5>₱ <span id="subTotal"> <?= number_format($subTotal, '2', '.', ',') ?></span></h5>
                     </div>
-                    <p>You will get discount of ₹1000 on this order</p>
+                    <p>You will get discount of ₱<?= $totalDiscount ?> on this order</p>
                 </div>
-                <img src="images/price-carv.png" class="cart_pcarvimg">
             </div>
         </div>
     </div>
@@ -108,25 +122,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seclet Your Address</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Select Your Address</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="modal_formbox">
-                        <select name="cars" id="cars" class="modal_form">
-                            <option value="volvo">Seclet Your Address</option>
-                            <option value="audi">Joypur</option>
-                            <option value="audi">Kolkata</option>
-                            <option value="audi">Hooghly</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                        <textarea type="text" placeholder="Message" class="modal_form1" required></textarea>
-                        <button class="modal_btn">ADD</button>
-                    </form>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                    </div>
+                    <div class=" mb-3">
+                        <label class="form-label">Area</label>
+                        <input type="text" class="form-control" id="area" name="area" placeholder="Area">
+                    </div>
+                    <div class=" mb-3">
+                        <label class="form-label">Pin Code</label>
+                        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pin Code">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Full Address</label>
+                        <textarea class="form-control" name="address" id="address" placeholder="Full Name"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <a href="javascript:void(0)" onclick="addAddress()" class="modal_btn form-control text-center">ADD</a>
+                    </div>
                 </div>
 
             </div>

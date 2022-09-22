@@ -4,20 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class OrderItemModel extends Model
 {
-    protected $table            = 'order';
+    protected $table            = 'order_items';
     protected $primaryKey       = 'id';
     protected $allowedFields    = [
         'id',
+        'items_name',
+        'items_amount',
+        'items_qty',
         'order_id',
-        'order_amount',
         'order_date',
-        'image',
-        'user_id',
-        'order_type',
-        'order_status',
-        'delivery_id',
         'created_at',
         'updated_at'
     ];

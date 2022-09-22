@@ -26,13 +26,18 @@ class User extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '100',
             ],
-            'phone' => [
-                'type'          => 'VARCHAR',
-                'constraint'    => '100',
-            ],
             'password' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '255',
+            ],
+            'image' => [
+                'type'          => 'text',
+                'null'          => false,
+            ],
+            'user_type' => [
+                'type'          => 'ENUM("user", "admin")',
+                'default'       => 'user',
+                'null'          => false
             ],
             'created_at' => [
                 'type'          => 'DATETIME',

@@ -72,3 +72,82 @@ function removeItem(productID, userID, cartID) {
     },
   });
 }
+
+function addAddress() {
+  const fullname = $('#fullname').val();
+  const city = $("#city").val();
+  const area = $("#area").val();
+  const pincode = $("#pincode").val();
+  const address = $("#address").val();
+  const addressStr = `${fullname} - ${pincode}`;
+  if (fullname == "") {
+    alert("Please enter your name");
+    return false;
+  } else if (city == "") {
+    alert("Please enter your city");
+    return false;
+  } else if (area == "") {
+    alert("Please enter your area");
+    return false;
+  } else if (pincode == "") {
+    alert("Please enter your pincode");
+    return false;
+  } else if (address == "") {
+    alert("Please enter your address");
+    return false;
+  } else {
+     $.ajax({
+       url: baseUrl + "addShoppingAddress",
+       type: "POST",
+       data: {
+         fullname: fullname,
+         city: city,
+         area: area,
+         pincode: pincode,
+         address: address,
+       },
+       success: function (response) {
+        const jsonData = JSON.parse(response);
+        // alert(response);
+         if (jsonData.status == 'success') {
+           $("#shippingAddressDiv").append(
+             '<label> <input type="radio" name="shippingAddress" value="' +
+               jsonData.lastInsertedID +
+               '"> ' +
+               addressStr +
+               "</label><br>"
+           );
+         } else {
+         }
+       },
+     });
+  }
+}
+
+function proceedToPay() {
+  if ($("input:radio[name='shippingAddress']").is(":checked")) {
+    const deliveryAddress = $("input[name='shippingAddress']:checked").val();
+    const paymentMethod = $("input[name='paymentMethod']:checked").val();
+
+    if (paymentMethod === "COD") {
+      $.ajax({
+        url: baseUrl + "proceedToOrder",
+        type: "POST",
+        data: {
+          deliveryAddress: deliveryAddress,
+          paymentMethod: paymentMethod,
+        },
+        success: function (response) {
+          const jsonData = JSON.parse(response);
+          if (jsonData.status == "success") {
+            window.location = baseUrl + "orderSuccess/" + jsonData.order_id;
+          }
+        },
+      });
+    } else {
+
+    }
+  } else {
+    alert("Please choose delivery address");
+  }
+}
