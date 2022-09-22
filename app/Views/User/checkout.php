@@ -7,20 +7,33 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 col-md-12 col-12">
-                <div class="cart_middleimgbox">
-                    <div class="cart_itembox">
-                        <h3>Total item (<span id="countOfProductInCart"><?= $cart_count ?></span>) </h3>
+                <div class="checkout_paymentbox">
+                    <div class="checkout_atextele">Delivery address</div>
+                    <div class="checkout_paymentform">
+                        <div id="shippingAddressDiv">
+                            <?php foreach ($shipping_address as $list) : ?>
+                                <label><input type="radio" name="shippingAddress" value="<?= $list['id']; ?>"> <?= $list['fullname'] . ' - ' . $list['pincode'] ?></label><br>
+                            <?php endforeach ?>
+                        </div>
                     </div>
+                    <div class="checkout_paymentbtnsc">
+                        <a href="particuler.html" class="consualt_btn" data-toggle="modal" data-target="#exampleModal">Add Address</a>
+                    </div>
+                </div>
+
+                <div class="checkout_atextele">Order Summary</div>
+
+                <div class="cart_middleimgbox">
+
                     <?php
                     $totalPrice = 0;
                     $totalDiscount = 0;
                     $subTotal = 0;
                     foreach ($cart_item as $item) {
                         $totalPrice += $item['MRP'] * $item['cart_quantity'];
-                        $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $totalDiscount += $item['MRP'] - $item['cost'];
                         $subTotal += $item['cost'] * $item['cart_quantity'];
                     ?>
-                        <div class="cart_middleborder" id="middlebordertop_<?= $item['id'] ?>"></div>
                         <div class="row" id="productRow_<?= $item['id'] ?>">
                             <div class="col-xl-2 col-md-12 col-12">
                                 <div class="cart_leftimgbox">
@@ -56,26 +69,25 @@
 
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-12 col-12">
-                                <div class="cart_rightextbox">
-                                    <div class="cart_middletextbtnsc">
-                                        <button class="cart_middletextbtn" onclick="removeItem(<?= $item['id'] ?>, <?= session()->get('id') ?>, <?= $item['cartID'] ?>)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="cart_deleteicon" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                            </svg>
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart_middleborder" id="middleborder_<?= $item['id'] ?>"></div>
 
-                    <?php }; ?>
+                        </div>
+
+                    <?php } ?>
                 </div>
-                <div class="cart_cheackoutsc">
-                    <a href="<?= base_url('checkout')?>">Checkout</a>
+                <div class="cart_emailbox">
+                        <div class="col-md-2">
+                            <label><input type="radio" value="COD" name="paymentMethod" id="" checked> COD</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label><input type="radio" value="ONLINE" name="paymentMethod" id=""> Online</label>
+                        </div>
+                        <div class="col-md-8">
+                            <a href="javascript:void(0)" onclick="proceedToPay()">proceed to pay</a>
+                        </div>
+                    <!-- <h4>Order confirmation mail will sent <span><?php echo session()->get('email') ?></span> </h4> -->
+
                 </div>
+
             </div>
             <div class="col-xl-3 col-md-12 col-12">
                 <div class="cart_pricebox">
@@ -104,4 +116,47 @@
     </div>
 </section>
 <!--cart middle section end hare-->
+<!--modal section start hare-->
+<section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Your Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                    </div>
+                    <div class=" mb-3">
+                        <label class="form-label">Area</label>
+                        <input type="text" class="form-control" id="area" name="area" placeholder="Area">
+                    </div>
+                    <div class=" mb-3">
+                        <label class="form-label">Pin Code</label>
+                        <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pin Code">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Full Address</label>
+                        <textarea class="form-control" name="address" id="address" placeholder="Full Name"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <a href="javascript:void(0)" onclick="addAddress()" class="modal_btn form-control text-center">ADD</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <?= $this->endSection() ?>

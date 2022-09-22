@@ -18,7 +18,7 @@ class ProductController extends BaseController
     {
         $data = [
             'title' => 'Product',
-            'categories' => (new CategoryModel)->findAll(),
+            'category' => (new CategoryModel)->select('category_name'),
             'products' => $this->productModel->findAll()
         ];
 

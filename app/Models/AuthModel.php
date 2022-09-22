@@ -6,9 +6,10 @@ use CodeIgniter\Model;
 
 class AuthModel extends Model
 {
-    protected $table            = 'users';
+    protected $table            = 'user';
     protected $primaryKey       = 'id';
     protected $allowedFields    = [
+        'id',
         'firstname',
         'lastname',
         'email',

@@ -75,14 +75,7 @@
 </section>
 
 <!--login banner section end here-->
-<footer class="defpooter_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <p>Copyright © 2045 Company Name | Developed by <b>kasmir </b></p>
-            </div>
-        </div>
-    </div>
-</footer>
+<?= $this->include('User/layout/inc/footer.php'); ?>
+
 
 <?= $this->endSection() ?>
