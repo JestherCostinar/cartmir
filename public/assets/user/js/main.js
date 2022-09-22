@@ -14,6 +14,9 @@ function addToCart(productID, price, userID) {
         $("#addToCartBtn").hide();
         $("#inputDiv").show();
         $("#countOfProductInCart").text(jsonData.count);
+        $("#subTotal").text(jsonData.subTotal.toLocaleString("en-US") + '.00');
+        $("#totalItemPrice").text(jsonData.totalPrice.toLocaleString("en-US") + ".00");
+        $("#totalDiscount").text(jsonData.totalDiscount);
       } else {
         // Statement
       }
@@ -28,8 +31,12 @@ function minus(productID, userID) {
     type: "POST",
     data: { productID: productID, userID: userID },
     success: function (response) {
-      // alert(response);
       const jsonData = JSON.parse(response);
+
+      $("#subTotal").text(jsonData.subTotal.toLocaleString("en-US") + ".00");
+      $("#totalItemPrice").text(jsonData.totalPrice.toLocaleString("en-US") + ".00");
+      $("#totalDiscount").text(jsonData.totalDiscount);
+      // alert(response);
       if (jsonData.status == "success") {
         $("#addCount").val(jsonData.qty);
         $("#addCount_" + productID).val(jsonData.qty);

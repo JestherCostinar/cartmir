@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Page</title>
+    <title>Checkout Page</title>
     
     <!--bootstrap links-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -21,37 +21,30 @@
 </head>
 <body>
     
-    
+   
     <!--cart middle section start hare-->
     <section class="cart_middlesc">
         <div class="container">
             <div class="row">
                 <div class="col-xl-9 col-md-12 col-12">
-                    <div class="cart_middleimgbox">
-                        <div class="cart_itembox">
-                            <h3>Total item (2)</h3>
-                            <h4>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                  </svg>
-                                  Deliver to
-                            </h4>
-                            <div class="cart_itemsearshbox">
-                                <p><span>John doe </span>  ,United state, 200012</p>
-                                <div class="dropdown">
-                                    <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                                      Home
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Kolkata</a>
-                                      <a class="dropdown-item" href="#">Joypur</a>
-                                      <a class="dropdown-item" href="#">Howrah</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="checkout_paymentbox">
+                        <div class="checkout_atextele">Delivery address</div>
+                        <form class="checkout_paymentform">
+                              <input type="radio">
+                              <label>John doe , United state, 200012</label><br>
+                              <input type="radio">
+                              <label>Kalon Jon , Kolkata, 712</label><br>
+                              <input type="radio">
+                              <label>Bibek lon , Kolkata, 712</label><br>
+                              <input type="radio">
+                              <label>Loi Hapis , United state, 200012</label>
+                        </form> 
+                        <div class="checkout_paymentbtnsc">
+                            <a href="particuler.html" class="consualt_btn"  data-toggle="modal" data-target="#exampleModal">Add Address</a>
                         </div>
-                        <div class="cart_middleborder"></div>
+                    </div>
+                    <div class="cart_middleimgbox">
+                        <div class="checkout_deliverybox">Order summery</div>
                         <div class="row">
                             <div class="col-xl-2 col-md-12 col-12">
                                 <div class="cart_leftimgbox">
@@ -94,53 +87,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cart_middleborder"></div>
-                        <div class="row">
-                            <div class="col-xl-2 col-md-12 col-12">
-                                <div class="cart_leftimgbox">
-                                    <div class="cart_leftimgcon">
-                                        <img src="images/PngItem_1930140_1-removebg-preview.png" class="cart_leftimg" alt="">
-                                    </div>
-                                    <div class="cart_formbox">
-                                        <div class="cart_formminus">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                            </svg>
-                                        </div>
-                                        <input type="text" maxlength="4" placeholder="2" class="cart_input">
-                                        <div class="cart_formplus">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="cart_formminusicon" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-12 col-12">
-                                <div class="cart_middletextbox">
-                                    <h3>Oppo reno pro max</h3>
-                                    <h4>Black</h4>
-                                    <h5>₹ 35,499 <del>₹ 10,999</del><span> 4% OFF</span></h5>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-md-12 col-12">
-                                <div class="cart_rightextbox">
-                                    <h6>Delivery expected  sun jan 31  I  <span> Delivery free</span></h6>
-                                    <div class="cart_middletextbtnsc">
-                                       <button class="cart_middletextbtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="cart_deleteicon" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                          </svg>
-                                          Remove 
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="cart_cheackoutsc">
-                        <a href="checkout.html">Checkout</a>
+                    <div class="cart_emailbox">
+                        <h4>Order confirmation mail will sent <span>email@xyz.com </span> </h4>
+                        <a href="success.html">proceed to pay</a>
                     </div>
+                    
                 </div>
                 <div class="col-xl-3 col-md-12 col-12">
                     <div class="cart_pricebox">
@@ -170,8 +122,39 @@
         </div>
     </section>
     <!--cart middle section end hare-->
-   
-
+     <!--modal section start hare-->
+     <section>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Seclet Your Address</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                   <form class="modal_formbox">
+                        <select name="cars" id="cars" class="modal_form">
+                        <option value="volvo">Seclet Your Address</option>
+                        <option value="audi">Joypur</option>
+                        <option value="audi">Kolkata</option>
+                        <option value="audi">Hooghly</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                        </select>
+                       <textarea type="text" placeholder="Message" class="modal_form1" required></textarea>
+                       <button class="modal_btn">ADD</button>
+                   </form> 
+                </div>
+               
+            </div>
+            </div>
+        </div>
+    </section>
+<!--modal section end hare--> 
+    
     <!--bootstrap links-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>

@@ -42,6 +42,7 @@ $routes->get('details/(:num)', 'HomeController::details/$1');
 $routes->match(['get', 'post'], 'addToCart', 'HomeController::addToCart', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'decrement', 'HomeController::decrement', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'cart', 'HomeController::cart', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'checkout', 'HomeController::checkout', ['filter' => 'auth']);
 $routes->match(['get', 'post'], 'removeItem', 'HomeController::removeItem', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/login', 'AuthController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], '/signup', 'AuthController::signup', ['filter' => 'noauth']);

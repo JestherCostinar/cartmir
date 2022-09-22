@@ -3,7 +3,6 @@
 <?= $this->section('content'); ?>
 <?= $this->include('User/layout/inc/navbar.php'); ?>
 
-<!-- <?= print_r($cart_item) ?> -->
 <section class="cart_middlesc">
     <div class="container">
         <div class="row">
@@ -15,9 +14,11 @@
                     <?php
                     $totalPrice = 0;
                     $totalDiscount = 0;
+                    $subTotal = 0;
                     foreach ($cart_item as $item) {
-                        $totalPrice += $item['cost'] * $item['cart_quantity'];
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
                         $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
                     ?>
                         <div class="cart_middleborder" id="middlebordertop_<?= $item['id'] ?>"></div>
                         <div class="row" id="productRow_<?= $item['id'] ?>">
@@ -49,10 +50,7 @@
                                 <div class="cart_middletextbox">
                                     <h3><?= $item['product_name'] ?></h3>
                                     <h5>₱ <?= number_format($item['selling_price'], '2', '.', ',') ?> <del><?= number_format($item['MRP'], '2', '.', ',') ?></del>
-                                        <span> <?php
-                                                $new_price = $item['MRP'] - $item['selling_price'];
-                                                $discountPercentage = ($new_price / $item['MRP']) * 100;
-                                                echo number_format($discountPercentage, 2, '.', '') . '% OFF';
+                                        <span> <?= round(($item['MRP'] - $item['cost']) * 100 / $item['MRP'], 2) . '% OFF';
                                                 ?></span>
                                     </h5>
 
@@ -85,11 +83,11 @@
                     <div class="cart_priceborder"></div>
                     <div class="cart_pricetextbox">
                         <h4>Price 2 item</h4>
-                        <h5>₱ <?= number_format($totalPrice, '2', '.', ',') ?></h5>
+                        <h5>₱ <span id="totalItemPrice"> <?= number_format($totalPrice, '2', '.', ',') ?></span></h5>
                     </div>
                     <div class="cart_pricetextbox">
                         <h4>Discount</h4>
-                        <h6>₱ <?= $totalDiscount ?></h6>
+                        <h6>₱ <span id="totalDiscount"><?= $totalDiscount ?></span></h6>
                     </div>
                     <div class="cart_pricetextbox">
                         <h4>Delivery charge</h4>
@@ -97,7 +95,7 @@
                     </div>
                     <div class="cart_amountbox">
                         <h4>Total amount</h4>
-                        <h5>₱ <?= number_format($totalPrice - $totalDiscount, '2', '.', ',') ?></h5>
+                        <h5>₱ <span id="subTotal"> <?= number_format($subTotal, '2', '.', ',') ?></span></h5>
                     </div>
                     <p>You will get discount of ₱<?= $totalDiscount ?> on this order</p>
                 </div>

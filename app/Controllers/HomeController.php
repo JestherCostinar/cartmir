@@ -73,18 +73,51 @@ class HomeController extends BaseController
                 ];
 
                 if($this->cartModel->update($id, $newData)) {
+                    $cart_item = $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                        ->where('cart.user_id', session()->get('id'))
+                        ->join('cart', 'cart.product_id = product.id')
+                        ->findAll();
+
+                    $totalPrice = 0;
+                    $totalDiscount = 0;
+                    $subTotal = 0;
+                    foreach ($cart_item as $item) {
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
+                        $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
+                    }
+        
                     $return_arr = array(
                         'status' => 'success',
                         'qty' => $oldQyt + 1,
-                        'count' => $count
+                        'count' => $count,
+                        'totalPrice' => $totalPrice,
+                        'totalDiscount' => $totalDiscount,
+                        'subTotal' => $subTotal
                     );
                 } 
             } else {
                 if ($this->cartModel->save($data)) {
+                    $cart_item = $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                        ->where('cart.user_id', session()->get('id'))
+                        ->join('cart', 'cart.product_id = product.id')
+                        ->findAll();
+
+                    $totalPrice = 0;
+                    $totalDiscount = 0;
+                    $subTotal = 0;
+                    foreach ($cart_item as $item) {
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
+                        $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
+                    }
                     $return_arr = array(
                         'status' => 'success',
                         'qty' => 1,
-                        'count' => $count + 1
+                        'count' => $count + 1,
+                        'totalPrice' => $totalPrice,
+                        'totalDiscount' => $totalDiscount,
+                        'subTotal' => $subTotal
                     );
                 } 
             }
@@ -105,9 +138,26 @@ class HomeController extends BaseController
 
             if ($oldQyt == 1) {
                 if($this->cartModel->where('id', $id)->delete()) {
+                    $cart_item = $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                    ->where('cart.user_id', session()->get('id'))
+                        ->join('cart', 'cart.product_id = product.id')
+                        ->findAll();
+
+                    $totalPrice = 0;
+                    $totalDiscount = 0;
+                    $subTotal = 0;
+                    foreach ($cart_item as $item) {
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
+                        $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
+                    }
+                    
                     $return_arr = array(
                         'status' => 'deleted',
-                        'count' => $count - 1                   
+                        'count' => $count - 1,
+                        'totalPrice' => $totalPrice,
+                        'totalDiscount' => $totalDiscount,
+                        'subTotal' => $subTotal       
                     );
                 }
             } else {
@@ -116,10 +166,27 @@ class HomeController extends BaseController
                 ];
 
                 if ($this->cartModel->update($id, $newData)) {
+                    $cart_item = $this->productModel->select('product.id, product.product_name, product.product_desc, product.qty as product_quantity, product.image, product.MRP, product.selling_price, cart.id as cartID, cart.user_id, cart.qty as cart_quantity, cart.cost')
+                        ->where('cart.user_id', session()->get('id'))
+                        ->join('cart', 'cart.product_id = product.id')
+                        ->findAll();
+
+                    $totalPrice = 0;
+                    $totalDiscount = 0;
+                    $subTotal = 0;
+                    foreach ($cart_item as $item) {
+                        $totalPrice += $item['MRP'] * $item['cart_quantity'];
+                        $totalDiscount +=  $item['MRP'] - $item['cost'];
+                        $subTotal += $item['cost'] * $item['cart_quantity'];
+                    }
+
                     $return_arr = array(
                         'status' => 'success',
                         'qty' => $oldQyt - 1,
-                        'count' => $count 
+                        'count' => $count, 
+                        'totalPrice' => $totalPrice,
+                        'totalDiscount' => $totalDiscount,
+                        'subTotal' => $subTotal      
                     );
                 } 
             }
@@ -155,6 +222,15 @@ class HomeController extends BaseController
         ];
 
         return view('User/cart', $data);
+    }
+
+    public function checkout() {
+        $data = [
+            'categories' => $this->categoryModel->findAll(),
+            'title' => 'Checkout'
+        ];
+
+        return view('User/checkout', $data);
     }
 }
 

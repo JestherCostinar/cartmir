@@ -59,7 +59,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <p>Copyright © 2045 Company Name | Developed by <b>kasmir </b></p>
+                Copyright &copy; 2022 &mdash; Developed by kasmir
             </div>
         </div>
     </div>
