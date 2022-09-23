@@ -19,7 +19,7 @@
     <link href="<?= base_url('assets/admin/css/sb-admin-2.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/admin/css/login.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
-    <!-- <script src="https://kit.fontawesome.com/503b3d4bba.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/503b3d4bba.js" crossorigin="anonymous"></script>
 
 
 </head>

@@ -79,7 +79,7 @@ function addAddress() {
   const area = $("#area").val();
   const pincode = $("#pincode").val();
   const address = $("#address").val();
-  const addressStr = `${fullname} - ${pincode}`;
+  const addressStr = `${fullname}${pincode}`;
   if (fullname == "") {
     alert("Please enter your name");
     return false;
@@ -140,13 +140,13 @@ function proceedToPay() {
         success: function (response) {
           const jsonData = JSON.parse(response);
           if (jsonData.status == "success") {
-            window.location = baseUrl + "orderSuccess/" + jsonData.order_id;
+              window.location = baseUrl + "orderSuccess/" + jsonData.order_id;
+          } else {
+            console.log("asdas");
           }
         },
       });
-    } else {
-
-    }
+    } 
   } else {
     alert("Please choose delivery address");
   }

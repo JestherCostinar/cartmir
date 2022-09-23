@@ -33,7 +33,7 @@
                 <div class="details_textbox">
                     <h3 class="red"><?= $product['product_name'] ?></h3>
                     <h4>₱ <?= number_format($product['selling_price'], '2', '.', ',') ?> <span><del><?= number_format($product['MRP'], '2', '.', ',') ?></del></span></h4>
-                    <P>Hurry, Only 1 left!</P>
+                    <P>Hurry, Only <?= $product['product_quantity']?> left!</P>
                     <h5>Available offers</h5>
                     <p style="color: #000;"><?= $product['product_desc'] ?>
                     <p>

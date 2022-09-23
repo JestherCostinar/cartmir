@@ -299,25 +299,27 @@ class HomeController extends BaseController
 
                 foreach ($cartItem as $item) {
                     $orderItem = array(
-                        'items_name' => $orderID,
+                        'items_name' => $item['product_name'],
                         'items_amount' => $item['cost'],
                         'items_qty' => $item['cart_quantity'],
                         'order_date' => date('Y-m-d'),
                         'order_id' => $lastInsertedID,
                     );
 
-                    if ($this->orderItemsModel->save($orderItem)) {
-                        $response = [
-                            'status' => 'success',
-                            'orderdata' => $orderData
-                        ];
-                    } else {
-                        $response = [
-                            'status' => 'failed',                     
-                        ];
-                    }
-                    echo json_encode($response);
+                    $data = $this->orderItemsModel->save($orderItem);
                 }
+
+                if ($data) {
+                    $response = [
+                        'status' => 'success',
+                        'orderdata' => $orderData
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'failed',                     
+                    ];
+                }
+                echo json_encode($response); 
             } 
         }
     }
