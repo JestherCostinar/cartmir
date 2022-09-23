@@ -401,7 +401,7 @@ body {
 /*products_section start hare*/
 .products_section {
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 80px;
   overflow-x: hidden;
 }
 .products_section a {
@@ -1922,4 +1922,24 @@ li.nav-item.dropdown {
   overflow: hidden; /* make sure it hides the content that overflows */
   white-space: nowrap; /* don't break the line */
   text-overflow: ellipsis; /* give the beautiful '...' effect */
+}
+
+.center_div {
+    margin: 0px auto;
+    float: none;
+    padding: 48px;
+    border: 1px dashed;
+    margin: 130px 600px;
+box-shadow: 0 0 10px 5px rgb(187, 183, 183);
+
+}
+
+.center_div_signup{
+  margin: 0px auto;
+    float: none;
+    padding: 48px;
+    border: 1px dashed;
+    margin: 50px 600px;
+box-shadow: 0 0 10px 5px rgb(187, 183, 183);
+
 }

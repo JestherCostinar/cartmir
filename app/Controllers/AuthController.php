@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
 use App\Models\AuthModel;
+use App\Models\CategoryModel;
 
 class AuthController extends BaseController
 {
@@ -16,7 +17,8 @@ class AuthController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Login'
+            'title' => 'Login',
+            'categories' => (new CategoryModel())->findAll(),
         ];
 
         if ($this->request->getMethod() === 'post') {
@@ -32,16 +34,18 @@ class AuthController extends BaseController
             } else {
                 $userModel = new AuthModel();
                 $user = $userModel->where('email', $this->request->getPost('email'))->first();
-                $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $user['password']);
-
-                if (($validatePassword) && ($user['user_type'] === 'user')) {
-                    $this->setUserSession($user);
-                    return redirect()->to(base_url());
-                    
+                if($user) {
+                    $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $user['password']);
+                    if (($validatePassword) && ($user['user_type'] === 'user')) {
+                        $this->setUserSession($user);
+                        return redirect()->to(base_url());
+                    } else {
+                        session()->setFlashData('loginError', 'Email or Password don\'t match');
+                        return redirect()->to('/login');
+                    }
                 } else {
                     session()->setFlashData('loginError', 'Email or Password don\'t match');
                     return redirect()->to('/login');
-                   
                 }
             }
         }
@@ -51,7 +55,8 @@ class AuthController extends BaseController
     public function signup()
     {
         $data = [
-            'title' => 'Register'
+            'title' => 'Register',
+            'categories' => (new CategoryModel())->findAll(),
         ];
 
         if ($this->request->getMethod() === 'post') {
@@ -109,10 +114,15 @@ class AuthController extends BaseController
                 $adminModel = new AuthModel();
                 $admin = $adminModel->where('email', $this->request->getPost('email'))
                     ->first();
-                $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $admin['password']);
-                if (($validatePassword) && ($admin['user_type'] === 'admin')) {
-                    $this->setUserSession($admin);
-                    return redirect()->to('/dashboard');
+                if($admin) {
+                    $validatePassword = (new Hash)->decrypt($this->request->getPost('password'), $admin['password']);
+                    if (($validatePassword) && ($admin['user_type'] === 'admin')) {
+                        $this->setUserSession($admin);
+                        return redirect()->to('/dashboard');
+                    } else {
+                        session()->setFlashData('loginError', 'Email or Password don\'t match');
+                        return redirect()->to('/admin');
+                    }
                 } else {
                     session()->setFlashData('loginError', 'Email or Password don\'t match');
                     return redirect()->to('/admin');
