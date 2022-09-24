@@ -16,6 +16,7 @@ class AuthModel extends Model
         'password',
         'image',
         'user_type',
+        'is_verify',
         'updated_at'
     ];
 
