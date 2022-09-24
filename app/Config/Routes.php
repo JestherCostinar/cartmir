@@ -49,6 +49,7 @@ $routes->match(['get', 'post'], 'orderSuccess/(:any)', 'HomeController::orderSuc
 $routes->match(['get', 'post'], 'removeItem', 'HomeController::removeItem', ['filter' => 'auth']);
 $routes->match(['get', 'post'], '/login', 'AuthController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], '/signup', 'AuthController::signup', ['filter' => 'noauth']);
+$routes->match(['get', 'post'], '/verify-account', 'AuthController::verifyAccount', ['filter' => 'noauth']);
 $routes->get('/logout', 'AuthController::logout');
 
 /* ================ ADMIN ROUTES ==================== */
