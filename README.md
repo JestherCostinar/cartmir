@@ -46,6 +46,13 @@ composer install
 php spark migrate
 ```
 
+- Set up mailtrap.io to use for smtp server
+
+```
+go to app\Config\Email.php to configure mailtrap.io
+```
+
+
 - Then run
 
 ```
