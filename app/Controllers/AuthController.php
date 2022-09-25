@@ -104,11 +104,9 @@ class AuthController extends BaseController
 
     public function verifyAccount() {
         $verifyData = (new VerificationModel)->where('user_id', session()->get('account_to_verify'))->first();
-        $verification_code = $verifyData['verification_code'];
         $recipientData = (new AuthModel)->where('id', $verifyData['user_id'])->first();
-        $recipient = $recipientData['email'];
         
-        $this->sendVerification($recipient, $verification_code);
+        $this->sendVerification($recipientData['email'], $verifyData['verification_code']);
         
         $data = [
             'title' => 'Verify Account',
@@ -129,7 +127,7 @@ class AuthController extends BaseController
             if (!$this->validate($rules, $errors)) {
                 $data['validation'] = $this->validator;
             } else {
-                if($verification_code == $this->request->getPost('code')) {
+                if($verifyData['verification_code'] == $this->request->getPost('code')) {
                     (new AuthModel)->update(session()->get('account_to_verify'), [
                         'is_verify' => 1
                     ]);
@@ -152,7 +150,6 @@ class AuthController extends BaseController
         $email->setTo($to);
         $email->setSubject('Verification Code');
         $email->setMessage('Code: ' . $verification_code);
-
         $email->send();
     }
 

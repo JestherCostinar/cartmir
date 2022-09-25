@@ -506,6 +506,10 @@ input.products_input {
   background: #a0c3e7;
   border: 1px solid #a0c3e7;
 }
+
+.products_ulbox button:hover {
+    background: #80a8cf;
+}
 .products_ulboxicon {
   width: 18px;
   margin-top: -6px;
