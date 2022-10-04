@@ -1,4 +1,4 @@
-(https://user-images.githubusercontent.com/56688615/193772938-ec464bde-ab5e-4636-80e4-54c2d3a1b1b7.PNG)
+
 # Kasmir Cart 🛒
 
 ## What is Kasmir Cart![Cartmir]
@@ -68,5 +68,5 @@ php spark serve
 - Instagram - https://www.instagram.com/kaassmir/
 - Twitter - https://twitter.com/kasmir_
 
-
+![Frontpage](https://user-images.githubusercontent.com/56688615/193772938-ec464bde-ab5e-4636-80e4-54c2d3a1b1b7.PNG)
 
