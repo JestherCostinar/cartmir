@@ -31,8 +31,13 @@ cp env .env
 - Open the .env file and configure the database access
 
 ```
-composer create-project laravel/laravel example-app
+database.default.hostname = localhost
+database.default.database = kasmir_ecommerce
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
 ```
+
 - Install packages:
 
 ```
